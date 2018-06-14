@@ -1,4 +1,12 @@
+{% load feature_flags %}
 {% load navigation_tags %}
+
+{% flag_enabled 'JULY_SALE' as show_banner %}
+{% if show_banner %}
+<div class="banner sale">
+    <a href="/sale">Big sale on bread! Limited time only! Click here!</a>
+</div>
+{% endif %}
 
 <div class="header clearfix" role="banner">
     <div class="container">
