@@ -3,9 +3,12 @@ from django.conf import settings
 from django.contrib import admin
 
 from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.core.views import serve
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.contrib.sitemaps.views import sitemap
-from wagtail.core import urls as wagtail_urls
+
+from flags.urls import flagged_path
+from wagtailsharing import urls as wagtailsharing_urls
 
 from bakerydemo.search import views as search_views
 from .api import api_router
@@ -20,6 +23,8 @@ urlpatterns = [
 
     url('^sitemap\.xml$', sitemap),
     url(r'^api/v2/', api_router.urls),
+
+    flagged_path('JULY_SALE', 'sale/', lambda request: serve(request, request.path)),
 ]
 
 
@@ -47,5 +52,5 @@ if settings.DEBUG:
     ]
 
 urlpatterns += [
-    url(r'', include(wagtail_urls)),
+    url(r'', include(wagtailsharing_urls)),
 ]
