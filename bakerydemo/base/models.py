@@ -131,6 +131,13 @@ class StandardPage(Page):
     ]
 
 
+class HeaderlessPage(StandardPage):
+    """A generic content page, without a header."""
+
+    class Meta:
+        proxy = True
+
+
 class HomePage(Page):
     """
     The Home Page. This looks slightly more complicated than it is. You can
